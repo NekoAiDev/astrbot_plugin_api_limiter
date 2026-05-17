@@ -625,7 +625,8 @@ class APIRateLimiter(Star):
         msg: str = self.config.get("reject_message", "")
         if msg:
             try:
-                await event.send(msg)
+                from astrbot.api.message_components import Plain
+                await event.reply([Plain(msg)])
             except Exception as e:
                 logger.warning(f"[API限频器] 发送拒绝消息失败: {e}")
 
